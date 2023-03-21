@@ -10,7 +10,7 @@ def canUnlockAll(boxes):
     box may contain keys to the other
     boxes.
     """
-    keys = list(boxes[0])
+    """keys = list(boxes[0])
     change = True
     while(change):
         change = False
@@ -23,4 +23,11 @@ def canUnlockAll(boxes):
                     keys.append(j)
     if len(keys) >= len(boxes):
         return True
-    return False
+    return False"""
+    n = len(boxes)
+    keys = [0]
+    for key in keys:
+        for box in boxes[key]:
+            if box not in keys and box < n:
+                keys.append(box)
+    return len(keys) == n
