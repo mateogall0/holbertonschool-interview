@@ -21,6 +21,6 @@ def canUnlockAll(boxes):
                 if j not in keys:
                     change = True
                     keys.append(j)
-    if len(keys) == len(boxes):
+    if len(keys) >= len(boxes):
         return True
     return False
