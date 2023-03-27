@@ -30,10 +30,16 @@ listint_t *insert_node(listint_t **head, int number)
         if (p->n > number || p->next->n > number)
             break;
 
-    temp = p->next;
-    p->next = new;
-    new->next = temp;
     if (p->n > number)
+    {
         *head = new;
+        new->next = p;
+    }
+    else
+    {
+        temp = p->next;
+        p->next = new;
+        new->next = temp;
+    }
     return new;
 }
