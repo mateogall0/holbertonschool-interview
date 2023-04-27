@@ -1,7 +1,8 @@
 #ifndef LISTS_H
 #define LISTS_H
-#define ARR_SIZE 1024
+#define ARR_SIZE 4096
 #include <stddef.h>
+#include <stdio.h>
 /**
  * struct listint_s - singly linked list
  * @n: integer
