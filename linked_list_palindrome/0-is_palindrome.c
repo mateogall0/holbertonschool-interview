@@ -10,7 +10,7 @@
 int is_palindrome(listint_t **head)
 {
 	int arr[ARR_SIZE];
-	int i = 0, j, temp;
+	int i = 0, j;
 	listint_t *p = NULL;
 
 	if (!head || !(*head))
@@ -19,7 +19,6 @@ int is_palindrome(listint_t **head)
 	{
 		arr[i] = p->n;
 	}
-	temp = i;
 	for (j = 0; j <= i / 2; j++, i--)
 	{
 		if (arr[j] != arr[i])
