@@ -14,10 +14,15 @@ status_codes = [200, 301, 400, 401, 403, 404, 405, 500]
 
 for line in sys.stdin:
     lineSplitted = line.split(" ")
-    if len(lineSplitted) < 9:
+    j = 0
+    while j < len(lineSplitted):
+        if len(lineSplitted[j]) == 3:
+            break
+        j += 1
+    else:
         continue
     try:
-        code = int(lineSplitted[7])
+        code = int(lineSplitted[j])
     except ValueError:
         continue
     if code not in status_codes:
@@ -26,7 +31,7 @@ for line in sys.stdin:
         current[code] = 1
     else:
         current[code] += 1
-    fileSize += int(lineSplitted[8])
+    fileSize += int(lineSplitted[j + 1])
     i += 1
     if i % 10 == 0:
         print("File size: {}".format(fileSize))
