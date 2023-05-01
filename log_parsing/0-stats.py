@@ -9,15 +9,30 @@ import sys
 
 current = {}
 fileSize = 0
-for i, line in enumerate(sys.stdin):
+i = 0
+status_codes = [200, 301, 400, 401, 403, 404, 405, 500]
+
+for line in sys.stdin:
     lineSplitted = line.split(" ")
-    if lineSplitted[7] not in current:
-        current[lineSplitted[7]] = 1
+    if len(lineSplitted) < 9:
+        continue
+    try:
+        code = int(lineSplitted[7])
+    except ValueError:
+        continue
+    if code not in status_codes:
+        continue
+    if code not in current:
+        current[code] = 1
     else:
-        current[lineSplitted[7]] += 1
+        current[code] += 1
     fileSize += int(lineSplitted[8])
-    if i != 0 and i % 10 == 0:
-        print('File size: {}'.format(fileSize))
-        for k in sorted(current.keys()):
-            print('{}: {}'.format(k, current[k]))
-        current = {}
+    i += 1
+    if i % 10 == 0:
+        print("Total file size: {}".format(fileSize))
+        for code in sorted(current.keys()):
+            print("{}: {}".format(code, current[code]))
+            
+print("Total file size: {}".format(fileSize))
+for code in sorted(current.keys()):
+    print("{}: {}".format(code, current[code]))
