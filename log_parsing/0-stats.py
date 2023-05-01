@@ -29,10 +29,10 @@ for line in sys.stdin:
     fileSize += int(lineSplitted[8])
     i += 1
     if i % 10 == 0:
-        print("Total file size: {}".format(fileSize))
+        print("File size: {}".format(fileSize))
         for code in sorted(current.keys()):
             print("{}: {}".format(code, current[code]))
-            
-print("Total file size: {}".format(fileSize))
+
+print("File size: {}".format(fileSize))
 for code in sorted(current.keys()):
     print("{}: {}".format(code, current[code]))
