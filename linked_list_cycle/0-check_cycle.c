@@ -8,7 +8,7 @@ int check_cycle(listint_t *list)
 	if (!list || !list->next)
 		return (0);
 
-	for (p = list->next; p && p->next; p = p->next)
+	for (p = list->next; p; p = p->next)
 		if (p == list)
 			return (1);
 
