@@ -5,27 +5,24 @@ UTF-8
 
 
 def validUTF8(data):
-    i = 0
-    while i < len(data):
-        num = data[i]
-        if num < 128:
-            i += 1
-        elif 128 <= num <= 191:
-            return False
-        else:
-            if num < 224:
-                expected_bytes = 2
-            elif num < 240:
-                expected_bytes = 3
-            elif num < 248:
-                expected_bytes = 4
-            else:
+    num_bytes = 0
+
+    for byte in data:
+        if num_bytes == 0:
+            if (byte >> 5) == 0b110:
+                num_bytes = 1
+            elif (byte >> 4) == 0b1110:
+                num_bytes = 2
+            elif (byte >> 3) == 0b11110:
+                num_bytes = 3
+            elif (byte >> 7) != 0:
                 return False
+        else:
+            if (byte >> 6) != 0b10:
+                return False
+            num_bytes -= 1
 
-            for j in range(1, expected_bytes):
-                i += 1
-                if i >= len(data) or not (128 <= data[i] <= 191):
-                    return False
-        i += 1
+        if num_bytes < 0:
+            return False
 
-    return True
+    return num_bytes == 0
